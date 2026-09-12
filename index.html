@@ -1,106 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zohaib Hussain | Mechatronics Engineer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zohaib Hussain | Mechatronics Engineer & Robotics Builder</title>
+<meta name="description" content="Zohaib Hussain is a Mechatronics & Control Engineering student at UET Lahore, building projects in robotics, automation, and AI. Explore his engineering portfolio.">
+<link rel="canonical" href="https://zohaibhussainengineer-e6244.web.app/">
+
+<meta property="og:title" content="Zohaib Hussain | Mechatronics Engineer & Robotics Builder">
+<meta property="og:description" content="Mechatronics & Control Engineering student at UET Lahore, building projects in robotics, automation, and AI.">
+<meta property="og:image" content="https://zohaibhussainengineer-e6244.web.app/profile.jpg">
+<meta property="og:url" content="https://zohaibhussainengineer-e6244.web.app/">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-    <div class="logo"><i class="fa-solid fa-microchip"></i> Zohaib</div>
-    <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <svg class="loader-logo" viewBox="0 0 100 100" fill="none">
+      <polygon points="50,4 90,27 90,73 50,96 10,73 10,27" stroke="#00D4FF" stroke-width="3"/>
+      <path d="M32 34H68L32 66H68" stroke="#EDEFF3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <div class="boot-text" id="bootText">INITIALIZING SYSTEM</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+</div>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<nav>
+  <div class="logo">
+    <svg viewBox="0 0 100 100" fill="none">
+      <polygon points="50,4 90,27 90,73 50,96 10,73 10,27" stroke="#00D4FF" stroke-width="4"/>
+      <path d="M32 34H68L32 66H68" stroke="#EDEFF3" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <span>ZOHAIB</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
 <section class="hero">
+  <div class="reveal">
     <img src="profile.jpg" alt="Zohaib Hussain" class="hero-pic">
-    <h1>Zohaib Hussain</h1>
-    <p>Mechatronics Engineer | Building in AI & Automation</p>
-    <a href="#projects" class="btn">View Projects</a>
-</section>
-<<section id="about" class="about">
-    <div class="about-content">
-        <h2>About Me</h2>
-        <p>I'm a Mechatronics & Control Engineering student at UET Lahore (Fall 2025), passionate about building intelligent systems at the intersection of engineering and AI. I'm on a mission to grow as an entrepreneur and technology builder turning ideas into real, working systems.</p>
-    </div>
-</section>
-<section id="skills" class="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-        <div class="skill-card">C++</div>
-        <div class="skill-card">Python</div>
-        <div class="skill-card">MATLAB</div>
-        <div class="skill-card">Arduino IDE</div>
-        <div class="skill-card">SolidWorks</div>
-        <div class="skill-card">AutoCAD</div>
+    <div class="hero-tag">Mechatronics & Control Engineering  UET Lahore</div>
+    <h1>Building the machines that will <span>run tomorrow.</span></h1>
+    <p>I design, build, and debug the systems where mechanics, electronics, and code meet — from motor controllers to automated production lines.</p>
+
+    <div class="hero-stats">
+      <div class="stat-card"><div class="num">2029</div><div class="label">Expected graduation</div></div>
+      <div class="stat-card"><div class="num">02</div><div class="label">Hands-on lab projects</div></div>
+      <div class="stat-card"><div class="num">06</div><div class="label">Tools mastered</div></div>
     </div>
 
-    <h2 style="margin-top: 60px;">Currently Learning</h2>
-    <div class="skills-grid">
-        <div class="skill-card learning">Robotics</div>
-        <div class="skill-card learning">Artificial Intelligence</div>
+    <div class="btn-row">
+      <a href="#projects" class="btn-primary">View my work</a>
+      <a href="#contact" class="btn-secondary">Get in touch</a>
     </div>
-</section>
-<section id="projects" class="projects">
-    <h2>Projects</h2>
-    <div class="projects-grid">
-        <div class="project-card">
-            <h3>Coming Soon</h3>
-            <p>Arduino-based automation project in progress.</p>
-        </div>
-        <div class="project-card">
-            <h3>Coming Soon</h3>
-            <p>SolidWorks mechanical design project in progress.</p>
-        </div>
-        <div class="project-card">
-            <h3>Coming Soon</h3>
-            <p>Python + data project in progress.</p>
-        </div>
-    </div>
+  </div>
+
+  <div class="robot-stage reveal">
+    <canvas id="circuitCanvas"></canvas>
+    <div class="stage-label">SYSTEM: ACTIVE</div>
+  </div>
 </section>
 
-<section class="education">
-    <h2>Education</h2>
-    <div class="edu-timeline">
-        <div class="edu-card">
-            <h3>University of Engineering and Technology (UET), Lahore</h3>
-            <p class="edu-degree">Mechatronics & Control Engineering</p>
-            <p class="edu-year">Fall 2025 — Expected Graduation: July 2029</p>
-        </div>
-        <div class="edu-card">
-            <h3>Government College University, Lahore</h3>
-            <p class="edu-degree">Intermediate (FSc Pre-Engineering)</p>
-        </div>
-        <div class="edu-card">
-            <h3>Crescent Model Higher Secondary School</h3>
-            <p class="edu-degree">Matriculation</p>
-        </div>
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="section-title">Engineer first, entrepreneur always.</h2>
+      <p>I'm a Mechatronics & Control Engineering student at UET Lahore, drawn to the point where a circuit diagram meets a moving part. Outside the lab, I'm building toward launching my own robotics and automation venture — treating every lab project as a rehearsal for that.</p>
     </div>
+    <div class="stat-card" style="min-width: unset;">
+      <div class="label" style="margin-bottom: 8px;">Currently based in</div>
+      <div style="font-weight: 600; margin-bottom: 20px;">Lahore, Pakistan</div>
+      <div class="label" style="margin-bottom: 8px;">Focused on</div>
+      <div style="font-weight: 600;">Robotics, automation, embedded control</div>
+    </div>
+  </div>
 </section>
 
-<section id="contact" class="contact">
-    <h2>Let's Connect</h2>
-    <p>Open to networking, collaborations, and opportunities.</p>
+<section id="skills">
+  <div class="section-label">Skills</div>
+  <h2 class="section-title">Tools I reach for</h2>
+  <div class="skills-grid">
+    <div class="skill-card"><i class="fa-solid fa-code"></i>C++</div>
+    <div class="skill-card"><i class="fa-brands fa-python"></i>Python</div>
+    <div class="skill-card"><i class="fa-solid fa-chart-line"></i>MATLAB</div>
+    <div class="skill-card"><i class="fa-solid fa-microchip"></i>Arduino IDE</div>
+    <div class="skill-card"><i class="fa-solid fa-cube"></i>SolidWorks</div>
+    <div class="skill-card"><i class="fa-solid fa-drafting-compass"></i>AutoCAD</div>
+  </div>
+  <h2 class="section-title" style="margin-top: 48px; font-size: 20px; color: var(--text-secondary);">Currently learning</h2>
+  <div class="skills-grid">
+    <div class="skill-card learning"><i class="fa-solid fa-robot"></i>Robotics</div>
+    <div class="skill-card learning"><i class="fa-solid fa-brain"></i>Artificial Intelligence</div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <h2 class="section-title">Things I've actually built</h2>
+
+  <div class="project-card">
+    <div class="project-icon"><i class="fa-solid fa-gauge-high"></i></div>
+    <div>
+      <h3>BLDC Motor Speed Optimization</h3>
+      <p>Built a six-step commutation controller using discrete logic — CD4017, CD4069, IRF3205/IRF4905 MOSFETs — to push a BLDC motor's RPM significantly higher. Team of 4, MCT112L lab.</p>
+      <div class="tag-row"><span class="tag">Power electronics</span><span class="tag">Motor control</span><span class="tag">Team project</span></div>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-icon"><i class="fa-solid fa-gears"></i></div>
+    <div>
+      <h3>Flanged Coupling Manufacturing</h3>
+      <p>Machined a functional 40mm OD flange coupling with keyway and bolt holes from raw stock — lathe, drill press, and vertical milling, designed first in SolidWorks.</p>
+      <div class="tag-row"><span class="tag">Manufacturing</span><span class="tag">CAD design</span><span class="tag">Machining</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-label">Education</div>
+  <h2 class="section-title">Where I'm learning it</h2>
+  <div class="timeline">
+    <div class="edu-item">
+      <h3>University of Engineering and Technology, Lahore</h3>
+      <div class="degree">Mechatronics & Control Engineering</div>
+      <div class="year">Fall 2025 — Expected July 2029</div>
+    </div>
+    <div class="edu-item">
+      <h3>Government College University, Lahore</h3>
+      <div class="degree">Intermediate (FSc Pre-Engineering)</div>
+    </div>
+    <div class="edu-item">
+      <h3>Crescent Model Higher Secondary School</h3>
+      <div class="degree">Matriculation</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-card">
+    <h2>Let's build something.</h2>
+    <p>Open to networking, collaborations, and early-stage opportunities.</p>
     <div class="contact-links">
-        <a href="mailto:zohaibhussain2007@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i> Email</a>
-        <a href="https://wa.me/923334255581" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-        <a href="https://www.linkedin.com/in/zohaib-hussain-5a6611387" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-        <a href="https://github.com/Zohaibenigineer" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
-        <a href="https://www.instagram.com/zohaibhussain_05/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
-        <a href="https://x.com/_Zohaib_06" target="_blank"><i class="fa-brands fa-x-twitter"></i> X</a>
-        <a href="https://www.youtube.com/channel/UCA1QyQ-CUO-tyxdGBqBz5qQ" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a>
+      <a href="mailto:zohaibhussain2007@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+      <a href="https://wa.me/923334255581"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://www.linkedin.com/in/zohaibhussainengineer"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://github.com/Zohaibenigineer"><i class="fa-brands fa-github"></i></a>
+      <a href="https://www.instagram.com/zohaibhussain_05/"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://x.com/_Zohaib_06"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/channel/UCA1QyQ-CUO-tyxdGBqBz5qQ"><i class="fa-brands fa-youtube"></i></a>
     </div>
+  </div>
 </section>
 
-<footer>
-    <p>© 2026 Zohaib Hussain. All rights reserved.</p>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-</footer>
+<footer>© 2026 Zohaib Hussain. All rights reserved.</footer>
+
+<script>
+  (function circuitBoard() {
+    const canvas = document.getElementById('circuitCanvas');
+    const ctx = canvas.getContext('2d');
+    const stage = canvas.parentElement;
+    let w, h, nodes, pulses;
+
+    function resize() {
+      w = canvas.width = stage.clientWidth;
+      h = canvas.height = stage.clientHeight;
+      buildGrid();
+    }
+
+    function buildGrid() {
+      const cols = 6, rows = 5;
+      nodes = [];
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          nodes.push({
+            x: (i / (cols - 1)) * w * 0.9 + w * 0.05 + (Math.random() - 0.5) * 30,
+            y: (j / (rows - 1)) * h * 0.9 + h * 0.05 + (Math.random() - 0.5) * 30
+          });
+        }
+      }
+      const edges = [];
+      nodes.forEach((n, idx) => {
+        const col = Math.floor(idx / rows);
+        if (col < cols - 1 && Math.random() > 0.35) edges.push([idx, idx + rows]);
+        if (idx % rows < rows - 1 && Math.random() > 0.55) edges.push([idx, idx + 1]);
+      });
+      pulses = edges.map(() => ({ t: Math.random(), speed: 0.003 + Math.random() * 0.004, active: Math.random() > 0.4 }));
+      window._edges = edges;
+    }
+
+    resize();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 200);
+    });
+
+    function draw() {
+      const edges = window._edges;
+      ctx.clearRect(0, 0, w, h);
+      ctx.strokeStyle = 'rgba(0,212,255,0.12)';
+      ctx.lineWidth = 1;
+      edges.forEach(([a, b]) => {
+        ctx.beginPath();
+        ctx.moveTo(nodes[a].x, nodes[a].y);
+        ctx.lineTo(nodes[b].x, nodes[b].y);
+        ctx.stroke();
+      });
+
+      edges.forEach(([a, b], i) => {
+        const p = pulses[i];
+        if (!p.active) return;
+        p.t += p.speed;
+        if (p.t > 1) p.t = 0;
+        const x = nodes[a].x + (nodes[b].x - nodes[a].x) * p.t;
+        const y = nodes[a].y + (nodes[b].y - nodes[a].y) * p.t;
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, 6);
+        grad.addColorStop(0, 'rgba(0,212,255,0.9)');
+        grad.addColorStop(1, 'rgba(0,212,255,0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      nodes.forEach(n => {
+        ctx.fillStyle = 'rgba(112,0,255,0.5)';
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  const bootLines = ["INITIALIZING SYSTEM", "CALIBRATING SENSORS", "LOADING PORTFOLIO.EXE"];
+  const bootText = document.getElementById('bootText');
+  const progressFill = document.getElementById('progressFill');
+  const loader = document.getElementById('loader');
+  let lineIdx = 0;
+  const lineInterval = setInterval(() => {
+    lineIdx++;
+    if (lineIdx < bootLines.length) bootText.textContent = bootLines[lineIdx];
+  }, 600);
+  let progress = 0;
+  const progInterval = setInterval(() => {
+    progress += 4;
+    progressFill.style.width = Math.min(progress, 100) + '%';
+    if (progress >= 100) {
+      clearInterval(progInterval);
+      clearInterval(lineInterval);
+      setTimeout(() => {
+        loader.classList.add('hide');
+        document.body.classList.add('loaded');
+      }, 200);
+    }
+  }, 70);
+</script>
+
 </body>
 </html>
