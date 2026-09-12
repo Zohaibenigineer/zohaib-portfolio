@@ -51,15 +51,28 @@
 </nav>
 
 <section class="hero">
-  <div class="reveal">
-   <div class="photo-block">
-  <div class="photo-glow"></div>
-  <img src="profile.jpg" alt="Zohaib Hussain" class="hero-pic">
-</div>
-<div class="availability-pill"><span class="pulse-dot"></span>Available for opportunities</div>
-    <div class="hero-tag">Mechatronics & Control Engineering  UET Lahore</div>
-    <h1>Building the machines that will <span>run tomorrow.</span></h1>
-    <p>I design, build, and debug the systems where mechanics, electronics, and code meet — from motor controllers to automated production lines.</p>
+  <canvas id="circuitCanvas" class="hero-bg-canvas"></canvas>
+
+  <div class="hero-inner reveal">
+    <div class="hero-top-row">
+      <div class="availability-pill"><span class="pulse-dot"></span>Available for opportunities</div>
+      <div class="hero-spec">Specialized in<br><strong>Robotics · Automation · Embedded Control</strong></div>
+    </div>
+
+    <div class="hero-main-row">
+      <div class="photo-block">
+        <div class="photo-glow"></div>
+        <img src="profile.jpg" alt="Zohaib Hussain" class="hero-pic">
+      </div>
+
+      <div class="hero-text-block">
+        <div class="hero-greet">Hey, I am</div>
+        <h1 class="hero-name">ZOHAIB<br><span>HUSSAIN</span></h1>
+        <div class="hero-role">MECHATRONICS ENGINEER</div>
+      </div>
+    </div>
+
+    <p class="hero-desc">I design, build, and debug the systems where mechanics, electronics, and code meet — from motor controllers to automated production lines.</p>
 
     <div class="hero-stats">
       <div class="stat-card"><div class="num">2029</div><div class="label">Expected graduation</div></div>
@@ -72,11 +85,6 @@
       <a href="#contact" class="btn-secondary">Get in touch</a>
     </div>
   </div>
-
-  <div class="robot-stage reveal">
-    <canvas id="circuitCanvas"></canvas>
-    <div class="stage-label">SYSTEM: ACTIVE</div>
-  </div>
 </section>
 
 <section id="about">
@@ -84,7 +92,7 @@
   <div class="about-grid">
     <div>
       <h2 class="section-title">Engineer first, entrepreneur always.</h2>
-      <p>I'm a Mechatronics & Control Engineering student at UET Lahore, drawn to the point where a circuit diagram meets a moving part. Outside the lab, I'm building toward launching my own robotics and automation venture — treating every lab project as a rehearsal for that.</p>
+      <p>I'm a Mechatronics & Control Engineering student at UET Lahore, drawn to the point where a circuit diagram meets a moving part. Outside the lab, I'm building toward launching my own robotics and automation venture treating every lab project as a rehearsal for that.</p>
     </div>
     <div class="stat-card" style="min-width: unset;">
       <div class="label" style="margin-bottom: 8px;">Currently based in</div>
@@ -121,7 +129,7 @@
     <div class="project-icon"><i class="fa-solid fa-gauge-high"></i></div>
     <div>
       <h3>BLDC Motor Speed Optimization</h3>
-      <p>Built a six-step commutation controller using discrete logic — CD4017, CD4069, IRF3205/IRF4905 MOSFETs — to push a BLDC motor's RPM significantly higher. Team of 4, MCT112L lab.</p>
+      <p>Built a six-step commutation controller using discrete logic CD4017, CD4069, IRF3205/IRF4905 MOSFETs to push a BLDC motor's RPM significantly higher. Team of 4, MCT112L lab.</p>
       <div class="tag-row"><span class="tag">Power electronics</span><span class="tag">Motor control</span><span class="tag">Team project</span></div>
     </div>
   </div>
@@ -130,7 +138,7 @@
     <div class="project-icon"><i class="fa-solid fa-gears"></i></div>
     <div>
       <h3>Flanged Coupling Manufacturing</h3>
-      <p>Machined a functional 40mm OD flange coupling with keyway and bolt holes from raw stock — lathe, drill press, and vertical milling, designed first in SolidWorks.</p>
+      <p>Machined a functional 40mm OD flange coupling with keyway and bolt holes from raw stock lathe, drill press, and vertical milling, designed first in SolidWorks.</p>
       <div class="tag-row"><span class="tag">Manufacturing</span><span class="tag">CAD design</span><span class="tag">Machining</span></div>
     </div>
   </div>
@@ -143,7 +151,7 @@
     <div class="edu-item">
       <h3>University of Engineering and Technology, Lahore</h3>
       <div class="degree">Mechatronics & Control Engineering</div>
-      <div class="year">Fall 2025 — Expected July 2029</div>
+      <div class="year">Fall 2025 Expected July 2029</div>
     </div>
     <div class="edu-item">
       <h3>Government College University, Lahore</h3>
