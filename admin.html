@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | Zohaib Hussain</title>
+<link rel="robots" content="noindex, nofollow">
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0A0E14;
+    --glass-solid: #131A26;
+    --glass-border: rgba(255,255,255,0.08);
+    --blue: #00D4FF;
+    --purple: #7000FF;
+    --text-primary: #EDEFF3;
+    --text-secondary: #8A93A6;
+    --danger: #FF4D4D;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 40px 5%;
+  }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+
+  .center-screen { min-height: 80vh; display: flex; align-items: center; justify-content: center; }
+  .card { background: var(--glass-solid); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px; max-width: 400px; width: 100%; }
+  .card h2 { margin-bottom: 20px; font-size: 22px; }
+  input, textarea {
+    width: 100%; padding: 12px 14px; margin-bottom: 14px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
+    border-radius: 10px; color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 14px;
+  }
+  textarea { resize: vertical; min-height: 80px; }
+  label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; }
+  button {
+    padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer;
+    font-weight: 600; font-size: 14px; font-family: 'Inter', sans-serif;
+  }
+  .btn-primary { background: linear-gradient(90deg, var(--blue), var(--purple)); color: #fff; width: 100%; }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-secondary { background: var(--glass-solid); border: 1px solid var(--glass-border); color: var(--text-primary); }
+  .error-msg { color: var(--danger); font-size: 13px; margin-bottom: 10px; min-height: 16px; }
+
+  #adminPanel { display: none; max-width: 900px; margin: 0 auto; }
+  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+  .top-bar h1 { font-size: 24px; }
+
+  .form-card { background: var(--glass-solid); border: 1px solid var(--glass-border); border-radius: 20px; padding: 30px; margin-bottom: 40px; }
+  .form-card h2 { font-size: 18px; margin-bottom: 20px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .file-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; display: block; }
+  .upload-status { font-size: 12px; color: var(--blue); margin-top: -8px; margin-bottom: 12px; min-height: 16px; }
+
+  .project-list-item {
+    background: var(--glass-solid); border: 1px solid var(--glass-border); border-radius: 14px;
+    padding: 20px; margin-bottom: 14px; display: flex; gap: 16px; align-items: center;
+  }
+  .project-list-item img { width: 70px; height: 70px; object-fit: cover; border-radius: 10px; flex-shrink: 0; }
+  .project-list-item .info { flex: 1; }
+  .project-list-item h3 { font-size: 16px; margin-bottom: 4px; }
+  .project-list-item p { color: var(--text-secondary); font-size: 13px; }
+  .project-list-item .actions { display: flex; gap: 8px; }
+  .project-list-item .actions button { padding: 8px 14px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="center-screen">
+  <div class="card">
+    <h2>Admin Login</h2>
+    <div class="error-msg" id="loginError"></div>
+    <label>Email</label>
+    <input type="email" id="loginEmail" placeholder="you@example.com">
+    <label>Password</label>
+    <input type="password" id="loginPassword" placeholder="••••••••">
+    <button class="btn-primary" onclick="doLogin()">Login</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+  <div class="top-bar">
+    <h1>Project Manager</h1>
+    <button class="btn-secondary" onclick="doLogout()">Logout</button>
+  </div>
+
+  <div class="form-card">
+    <h2 id="formTitle">Add New Project</h2>
+    <input type="hidden" id="editingId">
+    <label>Title</label>
+    <input type="text" id="pTitle" placeholder="e.g. BLDC Motor Speed Optimization">
+    <label>Description</label>
+    <textarea id="pDesc" placeholder="Full project description..."></textarea>
+    <label>Tags (comma separated)</label>
+    <input type="text" id="pTags" placeholder="Power electronics, Motor control, Team project">
+
+    <div class="form-row">
+      <div>
+        <span class="file-label">Image (required)</span>
+        <input type="file" id="pImage" accept="image/*">
+      </div>
+      <div>
+        <span class="file-label">Video (optional)</span>
+        <input type="file" id="pVideo" accept="video/*">
+      </div>
+    </div>
+    <div class="file-label" style="margin-top:14px;">PDF Report (optional)</div>
+    <input type="file" id="pPdf" accept="application/pdf">
+    <div class="upload-status" id="uploadStatus"></div>
+
+    <button class="btn-primary" onclick="saveProject()" id="saveBtn">Add Project</button>
+    <button class="btn-secondary" style="width:100%; margin-top:10px; display:none;" id="cancelEditBtn" onclick="cancelEdit()">Cancel Edit</button>
+  </div>
+
+  <h2 style="margin-bottom:16px; font-size:18px;">Existing Projects</h2>
+  <div id="projectList"></div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import {
+    getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+  import {
+    getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp, orderBy, query
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCrbm7jCtMzoNF2EORXnmQQDw5rIr9BJ3A",
+    authDomain: "zohaibhussainengineer-e6244.firebaseapp.com",
+    projectId: "zohaibhussainengineer-e6244",
+    storageBucket: "zohaibhussainengineer-e6244.firebasestorage.app",
+    messagingSenderId: "1087774770902",
+    appId: "1:1087774770902:web:90d1e6f4416fab68d4eb77"
+  };
+
+  const CLOUDINARY_CLOUD_NAME = "kvoieiyi";
+  const CLOUDINARY_UPLOAD_PRESET = "portfolio_uploads";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  window.doLogin = async function () {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const errorBox = document.getElementById('loginError');
+    errorBox.textContent = '';
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      errorBox.textContent = "Login failed. Check email/password.";
+    }
+  };
+
+  window.doLogout = async function () {
+    await signOut(auth);
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'block';
+      loadProjects();
+    } else {
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('adminPanel').style.display = 'none';
+    }
+  });
+
+  async function uploadToCloudinary(file, resourceType) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/${resourceType}/upload`, {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+    if (!data.secure_url) throw new Error('Upload failed');
+    return data.secure_url;
+  }
+
+  window.saveProject = async function () {
+    const saveBtn = document.getElementById('saveBtn');
+    const statusBox = document.getElementById('uploadStatus');
+    const title = document.getElementById('pTitle').value.trim();
+    const desc = document.getElementById('pDesc').value.trim();
+    const tags = document.getElementById('pTags').value.split(',').map(t => t.trim()).filter(Boolean);
+    const editingId = document.getElementById('editingId').value;
+    const imageFile = document.getElementById('pImage').files[0];
+    const videoFile = document.getElementById('pVideo').files[0];
+    const pdfFile = document.getElementById('pPdf').files[0];
+
+    if (!title || !desc) {
+      statusBox.textContent = "Title and description are required.";
+      return;
+    }
+    if (!editingId && !imageFile) {
+      statusBox.textContent = "Image is required for a new project.";
+      return;
+    }
+
+    saveBtn.disabled = true;
+    try {
+      let imageUrl = null, videoUrl = null, pdfUrl = null;
+
+      if (imageFile) {
+        statusBox.textContent = "Uploading image...";
+        imageUrl = await uploadToCloudinary(imageFile, 'image');
+      }
+      if (videoFile) {
+        statusBox.textContent = "Uploading video...";
+        videoUrl = await uploadToCloudinary(videoFile, 'video');
+      }
+      if (pdfFile) {
+        statusBox.textContent = "Uploading PDF...";
+        pdfUrl = await uploadToCloudinary(pdfFile, 'raw');
+      }
+
+      const projectData = { title, description: desc, tags };
+      if (imageUrl) projectData.imageUrl = imageUrl;
+      if (videoUrl) projectData.videoUrl = videoUrl;
+      if (pdfUrl) projectData.pdfUrl = pdfUrl;
+
+      if (editingId) {
+        statusBox.textContent = "Updating project...";
+        await updateDoc(doc(db, 'projects', editingId), projectData);
+      } else {
+        statusBox.textContent = "Saving project...";
+        projectData.createdAt = serverTimestamp();
+        await addDoc(collection(db, 'projects'), projectData);
+      }
+
+      statusBox.textContent = "Done!";
+      resetForm();
+      loadProjects();
+    } catch (err) {
+      statusBox.textContent = "Error: " + err.message;
+    } finally {
+      saveBtn.disabled = false;
+    }
+  };
+
+  function resetForm() {
+    document.getElementById('editingId').value = '';
+    document.getElementById('pTitle').value = '';
+    document.getElementById('pDesc').value = '';
+    document.getElementById('pTags').value = '';
+    document.getElementById('pImage').value = '';
+    document.getElementById('pVideo').value = '';
+    document.getElementById('pPdf').value = '';
+    document.getElementById('uploadStatus').textContent = '';
+    document.getElementById('formTitle').textContent = 'Add New Project';
+    document.getElementById('saveBtn').textContent = 'Add Project';
+    document.getElementById('cancelEditBtn').style.display = 'none';
+  }
+
+  window.cancelEdit = function () {
+    resetForm();
+  };
+
+  window.editProject = function (id, data) {
+    document.getElementById('editingId').value = id;
+    document.getElementById('pTitle').value = data.title || '';
+    document.getElementById('pDesc').value = data.description || '';
+    document.getElementById('pTags').value = (data.tags || []).join(', ');
+    document.getElementById('formTitle').textContent = 'Edit Project';
+    document.getElementById('saveBtn').textContent = 'Update Project';
+    document.getElementById('cancelEditBtn').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  window.deleteProject = async function (id) {
+    if (!confirm('Delete this project? This cannot be undone.')) return;
+    await deleteDoc(doc(db, 'projects', id));
+    loadProjects();
+  };
+
+  async function loadProjects() {
+    const listEl = document.getElementById('projectList');
+    listEl.innerHTML = '<p style="color:var(--text-secondary)">Loading...</p>';
+    const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+      listEl.innerHTML = '<p style="color:var(--text-secondary)">No projects yet.</p>';
+      return;
+    }
+    listEl.innerHTML = '';
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      const item = document.createElement('div');
+      item.className = 'project-list-item';
+      item.innerHTML = `
+        <img src="${data.imageUrl || ''}" alt="${data.title}">
+        <div class="info">
+          <h3>${data.title}</h3>
+          <p>${(data.tags || []).join(' · ')}</p>
+        </div>
+        <div class="actions">
+          <button class="btn-secondary" data-edit-id="${docSnap.id}">Edit</button>
+          <button class="btn-danger" data-delete-id="${docSnap.id}">Delete</button>
+        </div>
+      `;
+      item.querySelector('[data-edit-id]').addEventListener('click', () => window.editProject(docSnap.id, data));
+      item.querySelector('[data-delete-id]').addEventListener('click', () => window.deleteProject(docSnap.id));
+      listEl.appendChild(item);
+    });
+  }
+</script>
+</body>
+</html>
