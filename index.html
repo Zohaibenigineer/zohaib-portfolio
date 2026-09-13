@@ -41,7 +41,7 @@
     "name": "University of Engineering and Technology, Lahore"
   },
   "address": {
-    "@type": "54000",
+    "@type": "PostalAddress",
     "addressLocality": "Lahore",
     "addressCountry": "Pakistan"
   },
@@ -99,7 +99,7 @@
     <div class="hero-stats">
       <div class="stat-card"><div class="num">2029</div><div class="label">Expected graduation</div></div>
       <div class="stat-card"><div class="num">Multiple</div><div class="label">Hands-on lab projects</div></div>
-      <div class="stat-card"><div class="num">50+</div><div class="label">Projects in progresss</div></div>
+      <div class="stat-card"><div class="num">50+</div><div class="label">Projects in progress</div></div>
     </div>
 
     <div class="btn-row">
@@ -115,6 +115,7 @@
     <div>
       <h2 class="section-title">Engineer first, entrepreneur always.</h2>
 <p>I'm Zohaib Hussain, a Mechatronics Engineer and Control Engineering student at UET Lahore, Pakistan, drawn to the point where a circuit diagram meets a moving part. My work spans robotics, motor control, embedded systems, and automation — from BLDC motor controllers to precision-machined mechanical components. Outside the lab, I'm building toward launching my own robotics and automation venture.</p>
+ </div>
     <div class="stat-card" style="min-width: unset;">
       <div class="label" style="margin-bottom: 8px;">Currently based in</div>
       <div style="font-weight: 600; margin-bottom: 20px;">Lahore, Pakistan</div>
@@ -189,6 +190,15 @@
   <div class="contact-card">
     <h2>Let's build something.</h2>
     <p>Open to networking, collaborations, and early-stage opportunities.</p>
+
+    <form id="contactForm" class="contact-form">
+      <input type="text" id="cName" placeholder="Your name" required>
+      <input type="email" id="cEmail" placeholder="Your email" required>
+      <textarea id="cMessage" placeholder="Your message" required></textarea>
+      <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
+      <div id="formStatus" class="form-status"></div>
+    </form>
+
     <div class="contact-links">
       <a href="mailto:zohaibhussain2007@gmail.com"><i class="fa-solid fa-envelope"></i></a>
       <a href="https://wa.me/923334255581"><i class="fa-brands fa-whatsapp"></i></a>
@@ -307,6 +317,42 @@
     }
   }, 70);
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyCrbm7jCtMzoNF2EORXnmQQDw5rIr9BJ3A",
+    authDomain: "zohaibhussainengineer-e6244.firebaseapp.com",
+    projectId: "zohaibhussainengineer-e6244",
+    storageBucket: "zohaibhussainengineer-e6244.firebasestorage.app",
+    messagingSenderId: "1087774770902",
+    appId: "1:1087774770902:web:90d1e6f4416fab68d4eb77"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const statusBox = document.getElementById('formStatus');
+    const name = document.getElementById('cName').value.trim();
+    const email = document.getElementById('cEmail').value.trim();
+    const message = document.getElementById('cMessage').value.trim();
+
+    statusBox.textContent = "Sending...";
+    try {
+      await addDoc(collection(db, 'messages'), {
+        name, email, message,
+        createdAt: serverTimestamp(),
+        read: false
+      });
+      statusBox.textContent = "Message sent! I'll get back to you soon.";
+      document.getElementById('contactForm').reset();
+    } catch (err) {
+      statusBox.textContent = "Something went wrong. Try again.";
+    }
+  });
+</script>
 </body>
 </html>

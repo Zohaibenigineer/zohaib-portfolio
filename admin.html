@@ -122,6 +122,9 @@
 
   <h2 style="margin-bottom:16px; font-size:18px;">Existing Projects</h2>
   <div id="projectList"></div>
+
+  <h2 style="margin: 40px 0 16px; font-size:18px;">Contact Messages</h2>
+  <div id="messageList"></div>
 </div>
 
 <script type="module">
@@ -165,11 +168,12 @@
     await signOut(auth);
   };
 
-  onAuthStateChanged(auth, (user) => {
+ onAuthStateChanged(auth, (user) => {
     if (user) {
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminPanel').style.display = 'block';
       loadProjects();
+      loadMessages();
     } else {
       document.getElementById('loginScreen').style.display = 'flex';
       document.getElementById('adminPanel').style.display = 'none';
@@ -312,6 +316,43 @@
       `;
       item.querySelector('[data-edit-id]').addEventListener('click', () => window.editProject(docSnap.id, data));
       item.querySelector('[data-delete-id]').addEventListener('click', () => window.deleteProject(docSnap.id));
+      listEl.appendChild(item);
+    });
+  }
+  
+  window.deleteMessage = async function (id) {
+    if (!confirm('Delete this message?')) return;
+    await deleteDoc(doc(db, 'messages', id));
+    loadMessages();
+  };
+
+  async function loadMessages() {
+    const listEl = document.getElementById('messageList');
+    listEl.innerHTML = '<p style="color:var(--text-secondary)">Loading...</p>';
+    const q = query(collection(db, 'messages'), orderBy('createdAt', 'desc'));
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+      listEl.innerHTML = '<p style="color:var(--text-secondary)">No messages yet.</p>';
+      return;
+    }
+    listEl.innerHTML = '';
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      const date = data.createdAt ? data.createdAt.toDate().toLocaleString() : '';
+      const item = document.createElement('div');
+      item.className = 'project-list-item';
+      item.style.alignItems = 'flex-start';
+      item.innerHTML = `
+        <div class="info">
+          <h3>${data.name} — <span style="color:var(--text-secondary); font-weight:400;">${data.email}</span></h3>
+          <p>${data.message}</p>
+          <p style="margin-top:6px; font-size:11px;">${date}</p>
+        </div>
+        <div class="actions">
+          <button class="btn-danger" data-msg-delete="${docSnap.id}">Delete</button>
+        </div>
+      `;
+      item.querySelector('[data-msg-delete]').addEventListener('click', () => window.deleteMessage(docSnap.id));
       listEl.appendChild(item);
     });
   }
